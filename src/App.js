@@ -4,48 +4,51 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 
-
 function App() {
 
-  const [users, setUsers] = useState([])
-  const [posts, setPosts] = useState([])
-  const [id, setId] = useState(1)
+  const [teams, setTeams] = useState([])
+  const [roster, setRoster] = useState([])
+  const [id, setId] = useState(0)
 
 
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/users/')
-      .then(({ data }) => setUsers(data))
+    axios
+      .get('https://statsapi.web.nhl.com/api/v1/teams/')
+      .then(({ data }) => setTeams(data.teams))
   }, [])
 
   useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
-      .then(({ data }) => setPosts(data))
+    axios
+      .get(`https://statsapi.web.nhl.com/api/v1/teams/${id}/roster`)
+      .then(({ data }) => setRoster(data.roster))
   }, [id])
 
-  // console.log(posts)
+  // console.log(roster)
 
   return (
-    <ul>
+    <ol>
       {
-        users.map(user => (
-          <li key={user.id}>
-            <h3 onClick={() => setId(user.id)}>{user.name}</h3>
+        teams.map(team => (
+          <li key={team.id}>
+            <h3 onClick={() => setId(team.id)}>{team.name}</h3>
             <div>
               {
-                posts.map(post => (
-                  <> {user.id === id &&
-                    <div>
-                      <p>{post.title}</p>
-                      <p>{post.body}</p>
-                    </div>}
-                  </>
+                roster.map(player => (
+                  <div>
+                    {
+                      team.id === id &&
+                      <div key={player.person.id}>
+                        <p className='m-1'>{player.person.fullName} - {player.position.name}</p>
+                      </div>
+                    }
+                  </div>
                 ))
               }
             </div>
           </li>
         ))
       }
-    </ul>
+    </ol>
   )
 
 }
