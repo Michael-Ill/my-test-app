@@ -6,8 +6,7 @@ import Header from './Header';
 function Team() {
   const [teams, setTeams] = useState([]);
   const [teamId, setTeamId] = useState(1);
-  const [shown, setShown] = useState(false);
-
+  
   useEffect(() => {
     axios
       .get('https://statsapi.web.nhl.com/api/v1/teams/')
@@ -20,13 +19,8 @@ function Team() {
       <ol className='m-3'>
         {
           teams.map(team => (
-            <li key={team.id}>
-              <h3 onClick={() => setShown(!shown)}>{team.name}</h3>
-              {
-                 <Roster teamId={teamId} currentTeamId={team.id} />
-              }
-            </li>
-          ))
+          <Roster teamId={teamId} team={team} />
+        ))
         }
       </ol>
     </>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Player from './Player';
 
 
-const Roster = ({ teamId, currentTeamId }) => {
+const Roster = ({ teamId, team }) => {
     const [roster, setRoster] = useState([]);
     const [playerId, setPlayerId] = useState(null)
     const [active, setActive] = useState(false)
@@ -32,23 +32,25 @@ const Roster = ({ teamId, currentTeamId }) => {
 
 
     return (
-        <>
-            <ul>
-                {
-                    roster.map(eachPlayer => (
-                        <div>
-                            {
-                                // currentTeamId === teamId &&
-                                <li key={eachPlayer.person.id}>
-                                    <p className='m-1' onClick={() => setPlayerId(eachPlayer.person.id)}>{eachPlayer.person.fullName} - {eachPlayer.position.abbreviation}</p>
-                                    <Player playerId={playerId} currentPlayerId={eachPlayer.person.id} />
-                                </li>
-                            }
-                        </div>
-                    ))
-                }
-            </ul>
-        </>
+        <li key={team.id}>
+            <h3 onClick={() => setActive(!active)}>{team.name}</h3>
+            { active &&
+                <ul>
+                    {
+                        roster.map(eachPlayer => (
+                            <div>
+                                {
+                                    <li key={eachPlayer.person.id}>
+                                        <p className='m-1' onClick={() => setPlayerId(eachPlayer.person.id)}>{eachPlayer.person.fullName} - {eachPlayer.position.abbreviation}</p>
+                                        <Player playerId={playerId} currentPlayerId={eachPlayer.person.id} />
+                                    </li>
+                                }
+                            </div>
+                        ))
+                    }
+                </ul>
+            }
+        </li>
     )
 }
 
