@@ -13,13 +13,17 @@ function Team() {
       .then(({ data }) => setTeams(data.teams))
   }, [])
 
+  
+
   return (
     <>
       <Header />
       <ol className='m-3'>
         {
           teams.map(team => (
-          <Roster teamId={teamId} team={team} />
+          <div onClick={() => setTeamId(team.id)}>
+          <Roster teamId={teamId} team={team} currentTeamId={team.id} />
+          </div>
         ))
         }
       </ol>
