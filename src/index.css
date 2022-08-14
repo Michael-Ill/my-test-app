@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Bauer;
+  src: url(fonts/Bauer-YE4v.ttf)
+}
+
+@font-face {
+  font-family: NHL;
+  src: url(fonts/NHL.ttf)
+}
+
 .playerInfoContainer {
   font-size: 12px;
   line-height: 5pt;
@@ -7,4 +17,17 @@
 
 .headerContainer {
   background-color: cornflowerblue;
+}
+
+.teamNames {
+  cursor:pointer
+}
+
+.playerList {
+  cursor:pointer
+}
+
+.headerTitle {
+  font-family: NHL;
+  color: black;
 }

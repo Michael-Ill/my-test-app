@@ -17,7 +17,7 @@ const Player = ({playerId, currentPlayerId}) => {
         <>
         { 
         player.id === currentPlayerId &&
-        <PlayerInfo player={player} setPlayer={setPlayer} playerId={playerId}/>
+        <PlayerInfo player={player} />
         }
         </>
     )

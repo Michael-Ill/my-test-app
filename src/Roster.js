@@ -16,12 +16,12 @@ const Roster = ({ teamId, team }) => {
                 const sorted = data.roster.sort((a, b) => {
                     if (a.person.fullName > b.person.fullName) {
                         return 1
-                    } 
+                    }
                     if (a.person.fullName < b.person.fullName) {
                         return -1
                     }
                     return 0
-                })  
+                })
                 console.log(sorted)
                 setRoster(sorted)
 
@@ -29,19 +29,27 @@ const Roster = ({ teamId, team }) => {
             .catch(error => console.log(error))
     }, [teamId])
 
-    // console.log(currentTeamId, team.id)
+    function changeFont(e) {
+        e.target.style.color = "black"
+    }
+
+    function defaultFont(e) {
+        e.target.style.color = "white"
+    }
+
+
 
     return (
         <li key={team.id}>
-            <h3 onClick={() => setActive(!active)}>{team.name}</h3>
-            { active &&
+            <button onMouseOver={changeFont} onMouseLeave={defaultFont} className='btn btn-primary btn-block m-1' onClick={() => setActive(!active)}>{team.name}</button>
+            {active &&
                 <ul>
                     {
                         roster.map(eachPlayer => (
                             <div>
                                 {
                                     <li key={eachPlayer.person.id}>
-                                        <p className='m-1' onClick={() => setPlayerId(eachPlayer.person.id)}>{eachPlayer.person.fullName} - {eachPlayer.position.abbreviation}</p>
+                                        <p className='playerList m-1' onMouseEnter={(e) => e.target.style.color="blue"} onMouseLeave={(e) => e.target.style.color="black"} onClick={() => setPlayerId(eachPlayer.person.id)}>{eachPlayer.person.fullName} - {eachPlayer.position.abbreviation}</p>
                                         <Player playerId={playerId} currentPlayerId={eachPlayer.person.id} />
                                     </li>
                                 }
