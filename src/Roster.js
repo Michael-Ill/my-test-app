@@ -3,7 +3,7 @@ import axios from 'axios';
 import Player from './Player';
 
 
-const Roster = ({ teamId, team, currentTeamId }) => {
+const Roster = ({ teamId, team }) => {
     const [roster, setRoster] = useState([]);
     const [playerId, setPlayerId] = useState(null)
     const [active, setActive] = useState(false)
@@ -29,7 +29,7 @@ const Roster = ({ teamId, team, currentTeamId }) => {
             .catch(error => console.log(error))
     }, [teamId])
 
-
+    // console.log(currentTeamId, team.id)
 
     return (
         <li key={team.id}>
@@ -37,7 +37,6 @@ const Roster = ({ teamId, team, currentTeamId }) => {
             { active &&
                 <ul>
                     {
-                        team.id === currentTeamId &&
                         roster.map(eachPlayer => (
                             <div>
                                 {
