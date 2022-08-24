@@ -1,4 +1,4 @@
-# This is my NHL API App where I tinker around with the NHL stats API. 
+# My NHL API Project
 
 ---
 
